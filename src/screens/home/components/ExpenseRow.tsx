@@ -18,7 +18,7 @@ export default function ExpenseRow(transaction: Transaction) {
       </View>
       <View>
         <View style={styles.rightContainer}>
-          <Text style={styles.text}>{transaction.date}</Text>
+          <Text style={styles.text}>{transaction.date.toISODate()}</Text>
           <Text style={styles.category}>{transaction.category}</Text>
         </View>
       </View>

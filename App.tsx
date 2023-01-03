@@ -1,13 +1,16 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { Dimensions, StyleSheet, Text, View } from "react-native";
+import { TransactionsProvider } from "./src/contexts/transactions.context";
 import NavigationTab from "./src/navigation/NavigationTab";
 import colorsStyle from "./styles/colors.style";
 
 export default function App() {
   return (
     <NavigationContainer>
-      <NavigationTab />
+      <TransactionsProvider>
+        <NavigationTab />
+      </TransactionsProvider>
     </NavigationContainer>
   );
 }

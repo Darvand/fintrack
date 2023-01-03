@@ -35,11 +35,8 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   container: {
-    ...layout.flexColumn,
     width: "80%",
-    flexGrow: 0,
-    flexShrink: 0,
-    flexBasis: "auto",
-    paddingVertical: 20,
+    height: 250,
+    paddingTop: 10,
   },
 });

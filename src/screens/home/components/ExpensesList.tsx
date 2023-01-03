@@ -3,19 +3,23 @@ import React from "react";
 import ExpenseRow from "./ExpenseRow";
 import { text } from "../../../../styles/text.style";
 import { Transaction } from "../../../types/transaction.type";
-import { transactions } from "../../../constants/transactions.constant";
+import useTransactions from "../../../hooks/useTransactions";
+import { DateTime } from "luxon";
 
 export default function ExpensesList() {
+  const { transactions } = useTransactions();
+  console.log("transactions", transactions);
   const groupedTransactions = transactions.reduce((group, transaction) => {
-    return { ...group, [transaction.date]: [...(group[transaction.date] || []), transaction] };
+    return { ...group, [transaction.date.toISODate()]: [...(group[transaction.date.toISODate()] || []), transaction] };
   }, {} as Record<string, Transaction[]>);
   return (
     <View style={styles.container}>
       <Text style={text.title}>Groceries</Text>
       <View style={styles.listContainer}>
         <FlatList
-          data={Object.entries(groupedTransactions)}
-          style={{ height: 107 }}
+          data={Object.entries(groupedTransactions).sort(
+            (previous, next) => DateTime.fromISO(next[0]).toMillis() - DateTime.fromISO(previous[0]).toMillis()
+          )}
           renderItem={({ item: [date, transaction] }) => (
             <View>
               <Text style={{ ...text.title, marginBottom: 10 }}>{date}</Text>
@@ -46,5 +50,6 @@ const styles = StyleSheet.create({
   listContainer: {
     marginTop: 18,
     flex: 1,
+    paddingBottom: 100,
   },
 });

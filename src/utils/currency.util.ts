@@ -1,3 +1,6 @@
-const ColFormatter = Intl.NumberFormat("es-CO");
+import "intl";
+import "intl/locale-data/jsonp/es-CO";
 
-export const toColCurrency = (value: number): string => `$ ${ColFormatter.format(value)}`;
+export const toColCurrency = (value: number): string => {
+  return `$ ${value}`;
+};
