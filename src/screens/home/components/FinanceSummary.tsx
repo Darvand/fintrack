@@ -2,12 +2,12 @@ import { FlatList, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Header from "./Header";
 import Card from "./Card";
-import { layout } from "../../../../styles/layout.style";
-import { transactions } from "../../../constants/transactions.constant";
 import { PaymentMethods } from "../../../enums/payment-method.enum";
 import { toColCurrency } from "../../../utils/currency.util";
+import useTransactions from "../../../hooks/useTransactions";
 
 export default function FinanceSummary() {
+  const { transactions } = useTransactions();
   const transactionsSummary = transactions.reduce((summary, transaction) => {
     return { ...summary, [transaction.paymentMethod]: (summary[transaction.paymentMethod] || 0) + transaction.value };
   }, {} as Record<string, number>);

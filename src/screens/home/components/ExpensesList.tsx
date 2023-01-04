@@ -8,7 +8,6 @@ import { DateTime } from "luxon";
 
 export default function ExpensesList() {
   const { transactions } = useTransactions();
-  console.log("transactions", transactions);
   const groupedTransactions = transactions.reduce((group, transaction) => {
     return { ...group, [transaction.date.toISODate()]: [...(group[transaction.date.toISODate()] || []), transaction] };
   }, {} as Record<string, Transaction[]>);

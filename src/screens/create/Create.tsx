@@ -55,7 +55,7 @@ export default function Create({ navigation, route }: NativeStackScreenProps<{ H
         ),
     }),
     onSubmit: (form) => {
-      addTransaction(form);
+      addTransaction({ ...form, value: +form.value * -1 });
       navigation.navigate("Home");
     },
   });
